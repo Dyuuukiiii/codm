@@ -1,11 +1,11 @@
-/* =========================================
-   CODM LOADOUT SYSTEM
-========================================= */
+/* =========================================================
+   CODM LOADOUT WEBSITE
+========================================================= */
 
 
-/* =========================================
-   VALID CATEGORIES
-========================================= */
+/* =========================================================
+   CONSTANTS
+========================================================= */
 
 const categories = [
     "SMG",
@@ -17,853 +17,1189 @@ const categories = [
     "Pistol"
 ];
 
+const STORAGE_KEY = "codm_loadouts_v2";
 
-/* =========================================
+
+/* =========================================================
    DEFAULT LOADOUTS
-========================================= */
+========================================================= */
 
 const defaultLoadouts = [
 
     {
-        id: 1,
-
+        id: "default-qq9",
         name: "QQ9",
-
         category: "SMG",
 
-        image: "",
+        image:
+            "https://static.wikia.nocookie.net/callofduty/images/8/8c/QQ9_CoDM.png",
 
         description:
-            "Fast and aggressive SMG build for close-range fights.",
+            "Fast and aggressive SMG build designed for close-range gunfights.",
 
-        main: [
-            "Monolithic Suppressor",
-            "RTC Recon Tac Long",
-            "No Stock",
-            "Stippled Grip Tape",
-            "45 Round Extended Mag"
-        ],
+        mainBuild:
+`Monolithic Suppressor
+RTC Recon Tac Long
+No Stock
+Granulated Grip Tape
+45 Round Extended Mag`,
 
-        optic: "Classic Red Dot",
+        optic:
+`Red Dot Sight`,
 
-        playstyle: "Aggressive",
+        playstyle:
+            "Aggressive",
 
         perks:
             "Lightweight, Quick Fix, Dead Silence",
 
         favorite: false,
 
-        createdAt: Date.now() - 4000
+        createdAt: 1
     },
 
 
     {
-        id: 2,
-
+        id: "default-m4",
         name: "M4",
-
         category: "AR",
 
-        image: "",
+        image:
+            "https://static.wikia.nocookie.net/callofduty/images/7/7e/M4_CoDM.png",
 
         description:
-            "Balanced assault rifle build for reliable mid-range combat.",
+            "Reliable all-around assault rifle build with balanced recoil and range.",
 
-        main: [
-            "Monolithic Suppressor",
-            "OWC Marksman",
-            "No Stock",
-            "Granulated Grip Tape",
-            "60 Round Mag"
-        ],
+        mainBuild:
+`Monolithic Suppressor
+OWC Marksman
+No Stock
+Granulated Grip Tape
+60 Round Mag`,
 
-        optic: "Red Dot Sight",
+        optic:
+`Red Dot Sight`,
 
-        playstyle: "Balanced",
+        playstyle:
+            "Balanced",
 
         perks:
-            "Lightweight, Quick Fix, Dead Silence",
+            "Agile, Toughness, Dead Silence",
 
         favorite: false,
 
-        createdAt: Date.now() - 3000
+        createdAt: 2
     },
 
 
     {
-        id: 3,
-
+        id: "default-dlq",
         name: "DL Q33",
-
         category: "SR",
 
-        image: "",
+        image:
+            "https://static.wikia.nocookie.net/callofduty/images/7/73/DL_Q33_CoDM.png",
 
         description:
-            "Precision sniper build focused on long-range accuracy.",
+            "Classic bolt-action sniper designed for accurate long-range eliminations.",
 
-        main: [
-            "MIP Light",
-            "Tactical Suppressor",
-            "OWC Skeleton Stock",
-            "Stippled Grip Tape",
-            "FMJ"
-        ],
+        mainBuild:
+`OWC Light Suppressor
+MIP Light
+YKM Combat Stock
+Stippled Grip Tape
+Extended Mag A`,
 
-        optic: "Default Scope",
+        optic:
+`Tactical Scope`,
 
-        playstyle: "Sniper",
+        playstyle:
+            "Long Range",
 
         perks:
             "Agile, Toughness, Dead Silence",
 
         favorite: false,
 
-        createdAt: Date.now() - 2500
+        createdAt: 3
     },
 
 
     {
-        id: 4,
-
+        id: "default-sks",
         name: "SKS",
-
         category: "MM",
 
-        image: "",
+        image:
+            "https://static.wikia.nocookie.net/callofduty/images/7/73/SKS_CoDM.png",
 
         description:
-            "Semi-automatic marksman build for accurate mid-to-long range fights.",
+            "Fast semi-automatic marksman rifle for precise mid-to-long range fights.",
 
-        main: [
-            "Monolithic Suppressor",
-            "MIP Extended Light Barrel",
-            "OWC Skeleton Stock",
-            "Granulated Grip Tape",
-            "Extended Mag"
-        ],
+        mainBuild:
+`Monolithic Suppressor
+OWC Marksman
+RTC Steady Stock
+Granulated Grip Tape
+Extended Mag`,
 
-        optic: "Tactical Scope",
+        optic:
+`Red Dot Sight`,
 
-        playstyle: "Precision",
+        playstyle:
+            "Precision",
 
         perks:
             "Agile, Toughness, Dead Silence",
 
         favorite: false,
 
-        createdAt: Date.now() - 2000
+        createdAt: 4
     },
 
 
     {
-        id: 5,
-
+        id: "default-holger",
         name: "Holger 26",
-
         category: "LMG",
 
-        image: "",
+        image:
+            "https://static.wikia.nocookie.net/callofduty/images/0/0e/Holger_26_CoDM.png",
 
         description:
-            "High-capacity LMG build for sustained fire and lane control.",
+            "High-capacity LMG build focused on sustained fire and lane control.",
 
-        main: [
-            "Monolithic Suppressor",
-            "OWC Marksman",
-            "No Stock",
-            "Granulated Grip Tape",
-            "100 Round Belt"
-        ],
+        mainBuild:
+`Monolithic Suppressor
+OWC Marksman
+No Stock
+Granulated Grip Tape
+YKM Combat Stock`,
 
-        optic: "Red Dot Sight",
+        optic:
+`Red Dot Sight`,
 
-        playstyle: "Support",
+        playstyle:
+            "Suppressive",
 
         perks:
-            "Flak Jacket, Quick Fix, Dead Silence",
+            "Lightweight, Quick Fix, Dead Silence",
 
         favorite: false,
 
-        createdAt: Date.now() - 1500
+        createdAt: 5
     },
 
 
     {
-        id: 6,
-
+        id: "default-krm",
         name: "KRM-262",
-
         category: "SG",
 
-        image: "",
+        image:
+            "https://static.wikia.nocookie.net/callofduty/images/3/3d/KRM-262_CoDM.png",
 
         description:
-            "Powerful close-range shotgun build for aggressive pushes.",
+            "Powerful pump-action shotgun designed for close-quarter combat.",
 
-        main: [
-            "Marauder Suppressor",
-            "Extended Barrel",
-            "No Stock",
-            "Granulated Grip Tape",
-            "Tactical Foregrip"
-        ],
+        mainBuild:
+`Marauder Suppressor
+RTC Extended Light Barrel
+No Stock
+Granulated Grip Tape
+OWC Laser - Tactical`,
 
-        optic: "No Optic",
+        optic:
+`None`,
 
-        playstyle: "Rush",
+        playstyle:
+            "Close Range",
 
         perks:
             "Lightweight, Quick Fix, Dead Silence",
 
         favorite: false,
 
-        createdAt: Date.now() - 1000
+        createdAt: 6
     },
 
 
     {
-        id: 7,
-
+        id: "default-mw11",
         name: "MW11",
-
         category: "Pistol",
 
-        image: "",
+        image:
+            "https://static.wikia.nocookie.net/callofduty/images/1/1b/MW11_CoDM.png",
 
         description:
-            "Fast secondary weapon build for quick swaps and close-range fights.",
+            "Reliable sidearm with a fast handling profile for backup situations.",
 
-        main: [
-            "Muzzle Brake",
-            "OWC Marksman",
-            "Lightweight Trigger",
-            "Granulated Grip Tape",
-            "Extended Mag"
-        ],
+        mainBuild:
+`OWC Light Suppressor
+RTC Steady Stock
+OWC Laser - Tactical
+Granulated Grip Tape
+Extended Mag`,
 
-        optic: "No Optic",
+        optic:
+`None`,
 
-        playstyle: "Secondary",
+        playstyle:
+            "Secondary",
 
         perks:
             "Lightweight, Quick Fix, Dead Silence",
 
         favorite: false,
 
-        createdAt: Date.now()
+        createdAt: 7
     }
 
 ];
 
 
-/* =========================================
-   LOCAL STORAGE
-========================================= */
+/* =========================================================
+   STATE
+========================================================= */
 
-const STORAGE_KEY =
-    "codm_loadouts_v2";
-
-
-let loadouts =
-    JSON.parse(
-        localStorage.getItem(STORAGE_KEY)
-    );
-
-
-/* =========================================
-   FIRST TIME SETUP
-========================================= */
-
-if (
-    !Array.isArray(loadouts)
-) {
-
-    loadouts =
-        defaultLoadouts;
-
-    saveLoadouts();
-
-}
-
-
-/* =========================================
-   ELEMENTS
-========================================= */
-
-const container =
-    document.getElementById(
-        "loadoutContainer"
-    );
-
-
-const searchInput =
-    document.getElementById(
-        "searchInput"
-    );
-
-
-const sortSelect =
-    document.getElementById(
-        "sortSelect"
-    );
-
-
-const modal =
-    document.getElementById(
-        "modal"
-    );
-
-
-const deleteModal =
-    document.getElementById(
-        "deleteModal"
-    );
-
-
-const loadoutForm =
-    document.getElementById(
-        "loadoutForm"
-    );
-
-
-const emptyState =
-    document.getElementById(
-        "emptyState"
-    );
-
-
+let loadouts = [];
+let favoritesOnly = false;
 let deleteTargetId = null;
 
 
-/* =========================================
-   SAVE
-========================================= */
+/* =========================================================
+   DOM ELEMENTS
+========================================================= */
 
-function saveLoadouts() {
+const loadoutContainer =
+    document.getElementById("loadoutContainer");
 
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(loadouts)
-    );
+const emptyState =
+    document.getElementById("emptyState");
 
+const searchInput =
+    document.getElementById("searchInput");
+
+const sortSelect =
+    document.getElementById("sortSelect");
+
+const favoritesFilter =
+    document.getElementById("favoritesFilter");
+
+const addLoadoutBtn =
+    document.getElementById("addLoadoutBtn");
+
+const emptyAddBtn =
+    document.getElementById("emptyAddBtn");
+
+
+/* MODAL */
+
+const loadoutModal =
+    document.getElementById("loadoutModal");
+
+const closeModal =
+    document.getElementById("closeModal");
+
+const cancelModal =
+    document.getElementById("cancelModal");
+
+const modalTitle =
+    document.getElementById("modalTitle");
+
+const loadoutForm =
+    document.getElementById("loadoutForm");
+
+
+/* FORM */
+
+const editId =
+    document.getElementById("editId");
+
+const weaponName =
+    document.getElementById("weaponName");
+
+const weaponCategory =
+    document.getElementById("weaponCategory");
+
+const weaponImage =
+    document.getElementById("weaponImage");
+
+const description =
+    document.getElementById("description");
+
+const mainBuild =
+    document.getElementById("mainBuild");
+
+const optic =
+    document.getElementById("optic");
+
+const playstyle =
+    document.getElementById("playstyle");
+
+const perks =
+    document.getElementById("perks");
+
+
+/* DELETE */
+
+const deleteModal =
+    document.getElementById("deleteModal");
+
+const cancelDelete =
+    document.getElementById("cancelDelete");
+
+const confirmDelete =
+    document.getElementById("confirmDelete");
+
+
+/* IMAGE VIEWER */
+
+const imageViewer =
+    document.getElementById("imageViewer");
+
+const imageViewerClose =
+    document.getElementById("imageViewerClose");
+
+const viewerImage =
+    document.getElementById("viewerImage");
+
+const viewerName =
+    document.getElementById("viewerName");
+
+
+/* TOAST */
+
+const toast =
+    document.getElementById("toast");
+
+const toastText =
+    document.getElementById("toastText");
+
+
+/* =========================================================
+   LOAD STORAGE
+========================================================= */
+
+function loadFromStorage() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(STORAGE_KEY);
+
+        if (saved) {
+
+            const parsed =
+                JSON.parse(saved);
+
+            if (Array.isArray(parsed)) {
+
+                loadouts = parsed;
+
+                return;
+            }
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Could not load saved loadouts:",
+            error
+        );
+    }
+
+    loadouts =
+        JSON.parse(
+            JSON.stringify(defaultLoadouts)
+        );
+
+    saveToStorage();
 }
 
 
-/* =========================================
+/* =========================================================
+   SAVE STORAGE
+========================================================= */
+
+function saveToStorage() {
+
+    try {
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(loadouts)
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Could not save loadouts:",
+            error
+        );
+    }
+}
+
+
+/* =========================================================
    ESCAPE HTML
-========================================= */
+========================================================= */
 
 function escapeHTML(value) {
 
-    return String(value ?? "")
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+    if (value === null || value === undefined) {
+        return "";
+    }
 
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
 
-/* =========================================
+/* =========================================================
    GET FILTERED LOADOUTS
-========================================= */
+========================================================= */
 
 function getFilteredLoadouts() {
 
     const search =
         searchInput.value
-            .toLowerCase()
-            .trim();
+            .trim()
+            .toLowerCase();
 
+    let result =
+        loadouts.filter((loadout) => {
 
-    let results =
-        loadouts.filter(
-            loadout => {
+            const matchesSearch =
+                !search ||
+                loadout.name
+                    .toLowerCase()
+                    .includes(search) ||
+                loadout.category
+                    .toLowerCase()
+                    .includes(search) ||
+                loadout.description
+                    .toLowerCase()
+                    .includes(search);
 
-                return (
-                    loadout.name
-                        .toLowerCase()
-                        .includes(search)
-                );
+            const matchesFavorite =
+                !favoritesOnly ||
+                loadout.favorite === true;
 
-            }
-        );
+            return (
+                matchesSearch &&
+                matchesFavorite
+            );
+        });
 
 
     const sort =
         sortSelect.value;
 
 
-    if (sort === "name") {
+    if (sort === "nameAsc") {
 
-        results.sort(
-            (a, b) =>
-                a.name.localeCompare(
-                    b.name
-                )
+        result.sort((a, b) =>
+            a.name.localeCompare(b.name)
         );
 
+    } else if (sort === "nameDesc") {
+
+        result.sort((a, b) =>
+            b.name.localeCompare(a.name)
+        );
+
+    } else if (sort === "newest") {
+
+        result.sort(
+            (a, b) =>
+                (b.createdAt || 0) -
+                (a.createdAt || 0)
+        );
     }
 
 
-    if (sort === "newest") {
-
-        results.sort(
-            (a, b) =>
-                b.createdAt -
-                a.createdAt
-        );
-
-    }
-
-
-    if (sort === "favorites") {
-
-        results.sort(
-            (a, b) =>
-                Number(b.favorite) -
-                Number(a.favorite)
-        );
-
-    }
-
-
-    return results;
-
+    return result;
 }
 
 
-/* =========================================
-   RENDER EVERYTHING
-========================================= */
+/* =========================================================
+   CREATE IMAGE HTML
+========================================================= */
+
+function createImageHTML(loadout) {
+
+    const image =
+        escapeHTML(loadout.image);
+
+    const name =
+        escapeHTML(loadout.name);
+
+
+    if (!image) {
+
+        return `
+            <div class="weapon-image-wrapper">
+                <div class="weapon-image placeholder">
+                    NO IMAGE
+                </div>
+            </div>
+        `;
+    }
+
+
+    return `
+        <div
+            class="weapon-image-wrapper"
+            data-image="${image}"
+            data-name="${name}"
+            role="button"
+            tabindex="0"
+            aria-label="View ${name} image"
+        >
+
+            <img
+                class="weapon-image"
+                src="${image}"
+                alt="${name}"
+                loading="lazy"
+                onerror="this.style.display='none'; this.parentElement.classList.add('image-error');"
+            >
+
+        </div>
+    `;
+}
+
+
+/* =========================================================
+   CREATE CARD
+========================================================= */
+
+function createCard(loadout) {
+
+    const favoriteClass =
+        loadout.favorite
+            ? "active"
+            : "";
+
+
+    const mainBuildText =
+        escapeHTML(
+            loadout.mainBuild || "Not specified"
+        );
+
+
+    const opticText =
+        escapeHTML(
+            loadout.optic || "None"
+        );
+
+
+    const descriptionText =
+        escapeHTML(
+            loadout.description || "No description."
+        );
+
+
+    return `
+        <article
+            class="loadout-card"
+            data-id="${escapeHTML(loadout.id)}"
+        >
+
+            ${createImageHTML(loadout)}
+
+
+            <div class="card-body">
+
+                <div class="card-top">
+
+                    <div>
+
+                        <h3 class="weapon-name">
+                            ${escapeHTML(loadout.name)}
+                        </h3>
+
+                        <span class="weapon-category">
+                            ${escapeHTML(loadout.category)}
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="favorite-btn ${favoriteClass}"
+                        data-action="favorite"
+                        aria-label="Favorite ${escapeHTML(loadout.name)}"
+                    >
+                        ★
+                    </button>
+
+                </div>
+
+
+                <p class="card-description">
+                    ${descriptionText}
+                </p>
+
+
+                <!-- MAIN BUILD -->
+
+                <div class="build-box">
+
+                    <div class="build-title">
+                        <span>◆</span>
+                        MAIN BUILD
+                    </div>
+
+                    <div class="build-list">
+                        ${mainBuildText}
+                    </div>
+
+                </div>
+
+
+                <!-- OPTIC -->
+
+                <div class="build-box">
+
+                    <div class="build-title">
+                        <span>◈</span>
+                        OPTIC BUILD
+                    </div>
+
+                    <div class="build-list">
+                        ${opticText}
+                    </div>
+
+                </div>
+
+
+                <!-- EXTRA INFO -->
+
+                <div class="extra-info">
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            Playstyle
+                        </span>
+
+                        <span class="info-value">
+                            ${escapeHTML(
+                                loadout.playstyle ||
+                                "Not specified"
+                            )}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            Perks
+                        </span>
+
+                        <span class="info-value">
+                            ${escapeHTML(
+                                loadout.perks ||
+                                "Not specified"
+                            )}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="card-actions">
+
+                    <button
+                        class="card-action copy"
+                        data-action="copy"
+                    >
+                        COPY
+                    </button>
+
+                    <button
+                        class="card-action edit"
+                        data-action="edit"
+                    >
+                        EDIT
+                    </button>
+
+                    <button
+                        class="card-action delete"
+                        data-action="delete"
+                    >
+                        DELETE
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+    `;
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
 
 function renderLoadouts() {
 
-    const results =
+    const filtered =
         getFilteredLoadouts();
 
 
-    container.innerHTML = "";
+    loadoutContainer.innerHTML = "";
 
 
-    let totalDisplayed = 0;
+    let totalVisible = 0;
 
 
     categories.forEach(
         (category, index) => {
 
             const categoryLoadouts =
-                results.filter(
-                    loadout =>
-                        loadout.category ===
-                        category
+                filtered.filter(
+                    (loadout) =>
+                        loadout.category === category
                 );
 
 
             if (
                 categoryLoadouts.length === 0
             ) {
-
                 return;
-
             }
 
 
-            totalDisplayed +=
+            totalVisible +=
                 categoryLoadouts.length;
 
 
             const section =
-                document.createElement(
-                    "section"
-                );
-
+                document.createElement("section");
 
             section.className =
                 "weapon-section";
-
 
             section.id =
                 category;
 
 
-            const number =
-                String(index + 1)
-                    .padStart(2, "0");
-
-
             section.innerHTML = `
 
-                <div class="section-heading">
+                <div class="weapon-section-header">
 
-                    <div class="section-title">
+                    <div class="section-title-wrap">
 
                         <span class="section-number">
-                            ${number}
+                            ${String(index + 1).padStart(2, "0")}
                         </span>
 
                         <h2>
-                            ${category}
+                            ${getCategoryName(category)}
                         </h2>
 
                     </div>
 
                     <span class="section-description">
                         ${categoryLoadouts.length}
-                        LOADOUT${categoryLoadouts.length === 1 ? "" : "S"}
+                        loadout${categoryLoadouts.length === 1 ? "" : "s"}
                     </span>
 
                 </div>
 
-                <div class="loadout-grid"></div>
 
+                <div class="loadout-grid">
+
+                    ${categoryLoadouts
+                        .map(createCard)
+                        .join("")}
+
+                </div>
             `;
 
 
-            const grid =
-                section.querySelector(
-                    ".loadout-grid"
-                );
-
-
-            categoryLoadouts.forEach(
-                (loadout, cardIndex) => {
-
-                    grid.appendChild(
-                        createCard(
-                            loadout,
-                            cardIndex
-                        )
-                    );
-
-                }
-            );
-
-
-            container.appendChild(
-                section
-            );
-
+            loadoutContainer.appendChild(section);
         }
     );
 
 
-    if (
-        totalDisplayed === 0
-    ) {
+    if (totalVisible === 0) {
 
-        emptyState.classList.add(
-            "show"
+        emptyState.classList.remove("hidden");
+
+    } else {
+
+        emptyState.classList.add("hidden");
+    }
+
+
+    updateCategoryLinks();
+}
+
+
+/* =========================================================
+   CATEGORY NAME
+========================================================= */
+
+function getCategoryName(category) {
+
+    const names = {
+
+        SMG: "SUBMACHINE GUNS",
+
+        AR: "ASSAULT RIFLES",
+
+        SR: "SNIPER RIFLES",
+
+        MM: "MARKSMAN RIFLES",
+
+        LMG: "LIGHT MACHINE GUNS",
+
+        SG: "SHOTGUNS",
+
+        Pistol: "PISTOLS"
+    };
+
+
+    return names[category] || category;
+}
+
+
+/* =========================================================
+   UPDATE CATEGORY LINKS
+========================================================= */
+
+function updateCategoryLinks() {
+
+    document
+        .querySelectorAll(
+            ".category-nav a"
+        )
+        .forEach((link) => {
+
+            const category =
+                link.dataset.category;
+
+            const exists =
+                loadouts.some(
+                    (loadout) =>
+                        loadout.category === category
+                );
+
+
+            link.style.opacity =
+                exists ? "1" : "0.35";
+        });
+}
+
+
+/* =========================================================
+   OPEN ADD MODAL
+========================================================= */
+
+function openAddModal() {
+
+    loadoutForm.reset();
+
+    editId.value = "";
+
+    modalTitle.textContent =
+        "Add Loadout";
+
+    weaponCategory.value =
+        "SMG";
+
+    loadoutModal.classList.add("show");
+
+    document.body.style.overflow = "hidden";
+
+    setTimeout(() => {
+
+        weaponName.focus();
+
+    }, 100);
+}
+
+
+/* =========================================================
+   OPEN EDIT MODAL
+========================================================= */
+
+function openEditModal(id) {
+
+    const loadout =
+        loadouts.find(
+            (item) =>
+                item.id === id
+        );
+
+
+    if (!loadout) {
+        return;
+    }
+
+
+    editId.value =
+        loadout.id;
+
+    weaponName.value =
+        loadout.name;
+
+    weaponCategory.value =
+        loadout.category;
+
+    weaponImage.value =
+        loadout.image || "";
+
+    description.value =
+        loadout.description || "";
+
+    mainBuild.value =
+        loadout.mainBuild || "";
+
+    optic.value =
+        loadout.optic || "";
+
+    playstyle.value =
+        loadout.playstyle || "";
+
+    perks.value =
+        loadout.perks || "";
+
+
+    modalTitle.textContent =
+        "Edit Loadout";
+
+
+    loadoutModal.classList.add("show");
+
+    document.body.style.overflow = "hidden";
+}
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeLoadoutModal() {
+
+    loadoutModal.classList.remove("show");
+
+    document.body.style.overflow = "";
+}
+
+
+/* =========================================================
+   SAVE LOADOUT
+========================================================= */
+
+function saveLoadout(event) {
+
+    event.preventDefault();
+
+
+    const name =
+        weaponName.value.trim();
+
+
+    if (!name) {
+
+        showToast(
+            "Enter a weapon name."
+        );
+
+        weaponName.focus();
+
+        return;
+    }
+
+
+    const id =
+        editId.value.trim();
+
+
+    const data = {
+
+        name,
+
+        category:
+            weaponCategory.value,
+
+        image:
+            weaponImage.value.trim(),
+
+        description:
+            description.value.trim(),
+
+        mainBuild:
+            mainBuild.value.trim(),
+
+        optic:
+            optic.value.trim(),
+
+        playstyle:
+            playstyle.value.trim(),
+
+        perks:
+            perks.value.trim()
+    };
+
+
+    if (id) {
+
+        const index =
+            loadouts.findIndex(
+                (item) =>
+                    item.id === id
+            );
+
+
+        if (index !== -1) {
+
+            loadouts[index] = {
+
+                ...loadouts[index],
+
+                ...data
+            };
+        }
+
+
+        showToast(
+            "Loadout updated!"
         );
 
     } else {
 
-        emptyState.classList.remove(
-            "show"
-        );
+        const newLoadout = {
 
+            id:
+                "loadout-" +
+                Date.now() +
+                "-" +
+                Math.random()
+                    .toString(36)
+                    .slice(2, 8),
+
+            ...data,
+
+            favorite: false,
+
+            createdAt: Date.now()
+        };
+
+
+        loadouts.push(newLoadout);
+
+
+        showToast(
+            "Loadout added!"
+        );
     }
 
-}
+
+    saveToStorage();
+
+    closeLoadoutModal();
+
+    renderLoadouts();
 
 
-/* =========================================
-   CREATE CARD
-========================================= */
+    setTimeout(() => {
 
-function createCard(
-    loadout,
-    index
-) {
-
-    const card =
-        document.createElement(
-            "article"
-        );
-
-
-    card.className =
-        "loadout-card";
-
-
-    card.style.animationDelay =
-        `${index * 0.05}s`;
-
-
-    const mainAttachments =
-        loadout.main
-            .map(
-                attachment =>
-                    `<li>${escapeHTML(attachment)}</li>`
-            )
-            .join("");
-
-
-    const imageHTML =
-        loadout.image
-            ? `
-                <img
-                    class="weapon-image"
-                    src="${escapeHTML(loadout.image)}"
-                    alt="${escapeHTML(loadout.name)}"
-                    onerror="this.style.display='none'"
-                >
-              `
-            : `
-                <div class="weapon-image placeholder">
-                    ${escapeHTML(loadout.name)}
-                </div>
-              `;
-
-
-    card.innerHTML = `
-
-        <div class="card-top">
-
-            <span class="weapon-category">
-                ${escapeHTML(loadout.category)}
-            </span>
-
-            <button
-                class="favorite-btn ${
-                    loadout.favorite
-                        ? "active"
-                        : ""
-                }"
-                data-action="favorite"
-                data-id="${loadout.id}"
-                title="Favorite"
-            >
-                ${
-                    loadout.favorite
-                        ? "★"
-                        : "☆"
-                }
-            </button>
-
-        </div>
-
-
-        ${imageHTML}
-
-
-        <h3 class="weapon-name">
-            ${escapeHTML(loadout.name)}
-        </h3>
-
-
-        <p class="description">
-            ${
-                escapeHTML(
-                    loadout.description ||
-                    "No description added."
-                )
-            }
-        </p>
-
-
-        <div class="build main-build">
-
-            <div class="build-title">
-                MAIN BUILD
-            </div>
-
-            <ul class="attachments">
-
-                ${
-                    mainAttachments ||
-                    "<li>No attachments added</li>"
-                }
-
-            </ul>
-
-        </div>
-
-
-        <div class="build optic-build">
-
-            <div class="build-title">
-                OPTIC
-            </div>
-
-            <ul class="attachments">
-
-                <li>
-                    ${
-                        escapeHTML(
-                            loadout.optic ||
-                            "No optic selected"
-                        )
-                    }
-                </li>
-
-            </ul>
-
-        </div>
-
-
-        <div class="card-info">
-
-            ${
-                loadout.playstyle
-                    ? `
-                        <span class="info-tag">
-                            ${escapeHTML(
-                                loadout.playstyle
-                            )}
-                        </span>
-                      `
-                    : ""
-            }
-
-
-            ${
-                loadout.perks
-                    ? `
-                        <span class="info-tag">
-                            ${escapeHTML(
-                                loadout.perks
-                            )}
-                        </span>
-                      `
-                    : ""
-            }
-
-        </div>
-
-
-        <div class="card-actions">
-
-            <button
-                class="card-action"
-                data-action="edit"
-                data-id="${loadout.id}"
-            >
-                EDIT
-            </button>
-
-
-            <button
-                class="card-action"
-                data-action="copy"
-                data-id="${loadout.id}"
-            >
-                COPY
-            </button>
-
-
-            <button
-                class="card-action delete"
-                data-action="delete"
-                data-id="${loadout.id}"
-            >
-                ×
-            </button>
-
-        </div>
-
-    `;
-
-
-    return card;
-
-}
-
-
-/* =========================================
-   CARD ACTIONS
-========================================= */
-
-container.addEventListener(
-    "click",
-    function(event) {
-
-        const button =
-            event.target.closest(
-                "[data-action]"
+        const section =
+            document.getElementById(
+                data.category
             );
 
 
-        if (!button) {
-            return;
+        if (section) {
+
+            section.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
         }
 
-
-        const action =
-            button.dataset.action;
-
-
-        const id =
-            Number(
-                button.dataset.id
-            );
+    }, 100);
+}
 
 
-        if (
-            action === "favorite"
-        ) {
+/* =========================================================
+   DELETE
+========================================================= */
 
-            toggleFavorite(id);
+function openDeleteModal(id) {
 
-        }
+    deleteTargetId = id;
 
+    deleteModal.classList.add("show");
 
-        if (
-            action === "edit"
-        ) {
-
-            openEditModal(id);
-
-        }
+    document.body.style.overflow = "hidden";
+}
 
 
-        if (
-            action === "delete"
-        ) {
+function closeDeleteModal() {
 
-            openDeleteModal(id);
+    deleteModal.classList.remove("show");
 
-        }
+    deleteTargetId = null;
+
+    document.body.style.overflow = "";
+}
 
 
-        if (
-            action === "copy"
-        ) {
+function deleteLoadout() {
 
-            copyLoadout(id);
-
-        }
-
+    if (!deleteTargetId) {
+        return;
     }
-);
 
 
-/* =========================================
+    loadouts =
+        loadouts.filter(
+            (loadout) =>
+                loadout.id !==
+                deleteTargetId
+        );
+
+
+    saveToStorage();
+
+    closeDeleteModal();
+
+    renderLoadouts();
+
+    showToast(
+        "Loadout deleted."
+    );
+}
+
+
+/* =========================================================
    FAVORITE
-========================================= */
+========================================================= */
 
 function toggleFavorite(id) {
 
     const loadout =
         loadouts.find(
-            item =>
+            (item) =>
                 item.id === id
         );
 
@@ -877,22 +1213,28 @@ function toggleFavorite(id) {
         !loadout.favorite;
 
 
-    saveLoadouts();
+    saveToStorage();
 
     renderLoadouts();
 
+
+    showToast(
+        loadout.favorite
+            ? "Added to favorites."
+            : "Removed from favorites."
+    );
 }
 
 
-/* =========================================
-   COPY
-========================================= */
+/* =========================================================
+   COPY LOADOUT
+========================================================= */
 
-function copyLoadout(id) {
+async function copyLoadout(id) {
 
     const loadout =
         loadouts.find(
-            item =>
+            (item) =>
                 item.id === id
         );
 
@@ -904,492 +1246,667 @@ function copyLoadout(id) {
 
     const text = `
 
-${loadout.name}
-
-Category:
-${loadout.category}
+${loadout.name} — ${loadout.category}
 
 MAIN BUILD:
-${loadout.main.join("\n")}
+${loadout.mainBuild || "None"}
 
 OPTIC:
-${loadout.optic}
+${loadout.optic || "None"}
 
-Playstyle:
-${loadout.playstyle}
+PLAYSTYLE:
+${loadout.playstyle || "None"}
 
-Perks:
-${loadout.perks}
+PERKS:
+${loadout.perks || "None"}
 
-    `.trim();
+`;
 
 
-    navigator.clipboard
-        .writeText(text)
-        .then(
-            () => {
+    try {
 
-                alert(
-                    `${loadout.name} copied!`
-                );
-
-            }
-        )
-        .catch(
-            () => {
-
-                alert(
-                    "Could not copy loadout."
-                );
-
-            }
+        await navigator.clipboard.writeText(
+            text.trim()
         );
 
+        showToast(
+            "Loadout copied!"
+        );
+
+    } catch (error) {
+
+        const textarea =
+            document.createElement("textarea");
+
+        textarea.value =
+            text.trim();
+
+        document.body.appendChild(
+            textarea
+        );
+
+        textarea.select();
+
+        document.execCommand("copy");
+
+        textarea.remove();
+
+        showToast(
+            "Loadout copied!"
+        );
+    }
 }
 
 
-/* =========================================
-   ADD MODAL
-========================================= */
+/* =========================================================
+   CARD ACTIONS
+========================================================= */
 
-function openAddModal() {
+loadoutContainer.addEventListener(
+    "click",
+    function (event) {
 
-    loadoutForm.reset();
-
-
-    document.getElementById(
-        "editId"
-    ).value = "";
-
-
-    document.getElementById(
-        "modalTitle"
-    ).textContent =
-        "ADD LOADOUT";
+        const actionButton =
+            event.target.closest(
+                "[data-action]"
+            );
 
 
-    modal.classList.add(
-        "show"
-    );
-
-}
+        if (!actionButton) {
+            return;
+        }
 
 
-/* =========================================
-   EDIT MODAL
-========================================= */
-
-function openEditModal(id) {
-
-    const loadout =
-        loadouts.find(
-            item =>
-                item.id === id
-        );
+        const card =
+            actionButton.closest(
+                ".loadout-card"
+            );
 
 
-    if (!loadout) {
+        if (!card) {
+            return;
+        }
+
+
+        const id =
+            card.dataset.id;
+
+        const action =
+            actionButton.dataset.action;
+
+
+        if (action === "favorite") {
+
+            toggleFavorite(id);
+
+        } else if (action === "edit") {
+
+            openEditModal(id);
+
+        } else if (action === "delete") {
+
+            openDeleteModal(id);
+
+        } else if (action === "copy") {
+
+            copyLoadout(id);
+        }
+    }
+);
+
+
+/* =========================================================
+   IMAGE VIEWER
+========================================================= */
+
+function openImageViewer(
+    image,
+    name
+) {
+
+    if (!image) {
         return;
     }
 
 
-    document.getElementById(
-        "editId"
-    ).value =
-        loadout.id;
+    viewerImage.src =
+        image;
+
+    viewerImage.alt =
+        name || "Weapon image";
+
+    viewerName.textContent =
+        name || "";
 
 
-    document.getElementById(
-        "weaponName"
-    ).value =
-        loadout.name;
+    imageViewer.classList.add("show");
+
+    document.body.style.overflow = "hidden";
+}
 
 
-    document.getElementById(
-        "weaponCategory"
-    ).value =
-        loadout.category;
+function closeImageViewer() {
+
+    imageViewer.classList.remove("show");
+
+    document.body.style.overflow = "";
+
+    setTimeout(() => {
+
+        viewerImage.src = "";
+
+        viewerImage.alt = "";
+
+        viewerName.textContent = "";
+
+    }, 300);
+}
 
 
-    document.getElementById(
-        "weaponImage"
-    ).value =
-        loadout.image;
+/* CLICK IMAGE */
+
+loadoutContainer.addEventListener(
+    "click",
+    function (event) {
+
+        const imageWrapper =
+            event.target.closest(
+                ".weapon-image-wrapper[data-image]"
+            );
 
 
-    document.getElementById(
-        "description"
-    ).value =
-        loadout.description;
+        if (!imageWrapper) {
+            return;
+        }
 
 
-    document.getElementById(
-        "mainBuild"
-    ).value =
-        loadout.main.join(
-            "\n"
+        openImageViewer(
+            imageWrapper.dataset.image,
+            imageWrapper.dataset.name
         );
-
-
-    document.getElementById(
-        "optic"
-    ).value =
-        loadout.optic;
-
-
-    document.getElementById(
-        "playstyle"
-    ).value =
-        loadout.playstyle;
-
-
-    document.getElementById(
-        "perks"
-    ).value =
-        loadout.perks;
-
-
-    document.getElementById(
-        "modalTitle"
-    ).textContent =
-        "EDIT LOADOUT";
-
-
-    modal.classList.add(
-        "show"
-    );
-
-}
-
-
-/* =========================================
-   CLOSE MODAL
-========================================= */
-
-function closeModal() {
-
-    modal.classList.remove(
-        "show"
-    );
-
-}
-
-
-document
-    .getElementById(
-        "closeModal"
-    )
-    .addEventListener(
-        "click",
-        closeModal
-    );
-
-
-document
-    .getElementById(
-        "cancelBtn"
-    )
-    .addEventListener(
-        "click",
-        closeModal
-    );
-
-
-/* =========================================
-   FORM SUBMIT
-========================================= */
-
-loadoutForm.addEventListener(
-    "submit",
-    function(event) {
-
-        event.preventDefault();
-
-
-        const editId =
-            document.getElementById(
-                "editId"
-            ).value;
-
-
-        const main =
-            document.getElementById(
-                "mainBuild"
-            ).value
-                .split("\n")
-                .map(
-                    item =>
-                        item.trim()
-                )
-                .filter(
-                    item =>
-                        item.length > 0
-                );
-
-
-        const data = {
-
-            name:
-                document.getElementById(
-                    "weaponName"
-                ).value.trim(),
-
-            category:
-                document.getElementById(
-                    "weaponCategory"
-                ).value,
-
-            image:
-                document.getElementById(
-                    "weaponImage"
-                ).value.trim(),
-
-            description:
-                document.getElementById(
-                    "description"
-                ).value.trim(),
-
-            main: main,
-
-            optic:
-                document.getElementById(
-                    "optic"
-                ).value.trim(),
-
-            playstyle:
-                document.getElementById(
-                    "playstyle"
-                ).value.trim(),
-
-            perks:
-                document.getElementById(
-                    "perks"
-                ).value.trim()
-
-        };
-
-
-        /* EDIT */
-
-        if (editId) {
-
-            const index =
-                loadouts.findIndex(
-                    item =>
-                        item.id ===
-                        Number(editId)
-                );
-
-
-            if (index !== -1) {
-
-                loadouts[index] = {
-
-                    ...loadouts[index],
-
-                    ...data
-
-                };
-
-            }
-
-        }
-
-
-        /* ADD */
-
-        else {
-
-            loadouts.push({
-
-                id:
-                    Date.now(),
-
-                ...data,
-
-                favorite: false,
-
-                createdAt:
-                    Date.now()
-
-            });
-
-        }
-
-
-        saveLoadouts();
-
-        renderLoadouts();
-
-        closeModal();
-
     }
 );
 
 
-/* =========================================
-   DELETE
-========================================= */
+/* IMAGE KEYBOARD */
 
-function openDeleteModal(id) {
+loadoutContainer.addEventListener(
+    "keydown",
+    function (event) {
 
-    deleteTargetId = id;
-
-    deleteModal.classList.add(
-        "show"
-    );
-
-}
-
-
-function closeDeleteModal() {
-
-    deleteTargetId = null;
-
-    deleteModal.classList.remove(
-        "show"
-    );
-
-}
-
-
-document
-    .getElementById(
-        "cancelDelete"
-    )
-    .addEventListener(
-        "click",
-        closeDeleteModal
-    );
-
-
-document
-    .getElementById(
-        "confirmDelete"
-    )
-    .addEventListener(
-        "click",
-        function() {
-
-            if (
-                deleteTargetId === null
-            ) {
-                return;
-            }
-
-
-            loadouts =
-                loadouts.filter(
-                    item =>
-                        item.id !==
-                        deleteTargetId
-                );
-
-
-            saveLoadouts();
-
-            renderLoadouts();
-
-            closeDeleteModal();
-
+        if (
+            event.key !== "Enter" &&
+            event.key !== " "
+        ) {
+            return;
         }
-    );
 
 
-/* =========================================
+        const imageWrapper =
+            event.target.closest(
+                ".weapon-image-wrapper[data-image]"
+            );
+
+
+        if (!imageWrapper) {
+            return;
+        }
+
+
+        event.preventDefault();
+
+
+        openImageViewer(
+            imageWrapper.dataset.image,
+            imageWrapper.dataset.name
+        );
+    }
+);
+
+
+/* CLOSE IMAGE */
+
+imageViewerClose.addEventListener(
+    "click",
+    closeImageViewer
+);
+
+
+/* CLICK OUTSIDE IMAGE */
+
+imageViewer.addEventListener(
+    "click",
+    function (event) {
+
+        if (
+            event.target === imageViewer
+        ) {
+
+            closeImageViewer();
+        }
+    }
+);
+
+
+/* =========================================================
    SEARCH
-========================================= */
+========================================================= */
 
 searchInput.addEventListener(
     "input",
-    renderLoadouts
+    function () {
+
+        renderLoadouts();
+    }
 );
 
 
-/* =========================================
+/* =========================================================
    SORT
-========================================= */
+========================================================= */
 
 sortSelect.addEventListener(
     "change",
-    renderLoadouts
+    function () {
+
+        renderLoadouts();
+    }
 );
 
 
-/* =========================================
-   ADD BUTTON
-========================================= */
+/* =========================================================
+   FAVORITES FILTER
+========================================================= */
 
-document
-    .getElementById(
-        "addLoadoutBtn"
-    )
-    .addEventListener(
-        "click",
-        openAddModal
-    );
-
-
-/* =========================================
-   CLOSE MODALS OUTSIDE
-========================================= */
-
-modal.addEventListener(
+favoritesFilter.addEventListener(
     "click",
-    function(event) {
+    function () {
+
+        favoritesOnly =
+            !favoritesOnly;
+
+
+        favoritesFilter.classList.toggle(
+            "active",
+            favoritesOnly
+        );
+
+
+        renderLoadouts();
+    }
+);
+
+
+/* =========================================================
+   ADD BUTTONS
+========================================================= */
+
+addLoadoutBtn.addEventListener(
+    "click",
+    openAddModal
+);
+
+
+emptyAddBtn.addEventListener(
+    "click",
+    openAddModal
+);
+
+
+/* =========================================================
+   MODAL BUTTONS
+========================================================= */
+
+closeModal.addEventListener(
+    "click",
+    closeLoadoutModal
+);
+
+cancelModal.addEventListener(
+    "click",
+    closeLoadoutModal
+);
+
+loadoutForm.addEventListener(
+    "submit",
+    saveLoadout
+);
+
+
+/* =========================================================
+   DELETE BUTTONS
+========================================================= */
+
+cancelDelete.addEventListener(
+    "click",
+    closeDeleteModal
+);
+
+confirmDelete.addEventListener(
+    "click",
+    deleteLoadout
+);
+
+
+/* =========================================================
+   CLOSE MODALS WITH OUTSIDE CLICK
+========================================================= */
+
+loadoutModal.addEventListener(
+    "click",
+    function (event) {
 
         if (
-            event.target === modal
+            event.target === loadoutModal
         ) {
 
-            closeModal();
-
+            closeLoadoutModal();
         }
-
     }
 );
 
 
 deleteModal.addEventListener(
     "click",
-    function(event) {
+    function (event) {
 
         if (
             event.target === deleteModal
         ) {
 
             closeDeleteModal();
-
         }
-
     }
 );
 
 
-/* =========================================
-   ESC KEY
-========================================= */
+/* =========================================================
+   ESCAPE KEY
+========================================================= */
 
 document.addEventListener(
     "keydown",
-    function(event) {
+    function (event) {
 
-        if (
-            event.key === "Escape"
-        ) {
-
-            closeModal();
-
-            closeDeleteModal();
-
+        if (event.key !== "Escape") {
+            return;
         }
 
+
+        if (
+            imageViewer.classList.contains(
+                "show"
+            )
+        ) {
+
+            closeImageViewer();
+
+            return;
+        }
+
+
+        if (
+            loadoutModal.classList.contains(
+                "show"
+            )
+        ) {
+
+            closeLoadoutModal();
+
+            return;
+        }
+
+
+        if (
+            deleteModal.classList.contains(
+                "show"
+            )
+        ) {
+
+            closeDeleteModal();
+        }
     }
 );
 
 
-/* =========================================
-   INITIAL LOAD
-========================================= */
+/* =========================================================
+   SMOOTH CATEGORY SCROLL
+========================================================= */
+
+document
+    .querySelectorAll(
+        ".category-nav a, .nav-links a"
+    )
+    .forEach((link) => {
+
+        link.addEventListener(
+            "click",
+            function (event) {
+
+                const targetId =
+                    this.getAttribute(
+                        "href"
+                    );
+
+
+                if (
+                    !targetId ||
+                    !targetId.startsWith("#")
+                ) {
+                    return;
+                }
+
+
+                const target =
+                    document.querySelector(
+                        targetId
+                    );
+
+
+                if (!target) {
+                    return;
+                }
+
+
+                event.preventDefault();
+
+
+                const headerOffset =
+                    window.innerWidth <= 700
+                        ? 190
+                        : window.innerWidth <= 1000
+                            ? 205
+                            : 160;
+
+
+                const targetPosition =
+                    target.getBoundingClientRect()
+                        .top +
+                    window.scrollY -
+                    headerOffset;
+
+
+                window.scrollTo({
+
+                    top:
+                        targetPosition,
+
+                    behavior:
+                        "smooth"
+                });
+
+
+                document
+                    .querySelectorAll(
+                        ".category-nav a"
+                    )
+                    .forEach((item) => {
+
+                        item.classList.remove(
+                            "active"
+                        );
+                    });
+
+
+                const categoryLink =
+                    document.querySelector(
+                        `.category-nav a[href="${targetId}"]`
+                    );
+
+
+                if (categoryLink) {
+
+                    categoryLink.classList.add(
+                        "active"
+                    );
+                }
+            }
+        );
+    });
+
+
+/* =========================================================
+   ACTIVE CATEGORY WHILE SCROLLING
+========================================================= */
+
+const sectionObserver =
+    new IntersectionObserver(
+        function (entries) {
+
+            entries.forEach(
+                (entry) => {
+
+                    if (
+                        !entry.isIntersecting
+                    ) {
+                        return;
+                    }
+
+
+                    const id =
+                        entry.target.id;
+
+
+                    document
+                        .querySelectorAll(
+                            ".category-nav a"
+                        )
+                        .forEach((link) => {
+
+                            link.classList.toggle(
+                                "active",
+                                link.dataset.category === id
+                            );
+                        });
+                }
+            );
+        },
+        {
+            rootMargin:
+                "-30% 0px -60% 0px"
+        }
+    );
+
+
+function observeSections() {
+
+    document
+        .querySelectorAll(
+            ".weapon-section"
+        )
+        .forEach((section) => {
+
+            sectionObserver.observe(
+                section
+            );
+        });
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+
+function showToast(message) {
+
+    toastText.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(() => {
+
+            toast.classList.remove(
+                "show"
+            );
+
+        }, 2500);
+}
+
+
+/* =========================================================
+   RE-OBSERVE AFTER RENDER
+========================================================= */
+
+const originalRender =
+    renderLoadouts;
+
+
+/*
+    Wrap render function so the
+    IntersectionObserver gets updated
+    whenever sections are recreated.
+*/
+
+renderLoadouts = function () {
+
+    originalRender();
+
+    observeSections();
+};
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+loadFromStorage();
 
 renderLoadouts();
+
+observeSections();
+
+
+/* =========================================================
+   DEFAULT ACTIVE CATEGORY
+========================================================= */
+
+setTimeout(() => {
+
+    const firstCategory =
+        document.querySelector(
+            '.category-nav a[data-category="SMG"]'
+        );
+
+
+    if (firstCategory) {
+
+        firstCategory.classList.add(
+            "active"
+        );
+    }
+
+}, 100);
