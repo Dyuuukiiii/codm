@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CODM Loadouts</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            <span>CODM</span>
+            <small>LOADOUTS</small>
+        </div>
+
+        <button id="addLoadoutBtn" class="add-btn">
+            + Add Loadout
+        </button>
+
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <p class="hero-label">
+                CALL OF DUTY: MOBILE
+            </p>
+
+            <h1>
+                YOUR
+                <span>LOADOUTS</span>
+            </h1>
+
+            <p class="hero-description">
+                Organize your weapons, attachments and favorite
+                builds in one place.
+            </p>
+
+            <button
+                class="scroll-btn"
+                onclick="document.getElementById('SMG').scrollIntoView({ behavior: 'smooth' })"
+            >
+                VIEW LOADOUTS ↓
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SEARCH / SORT
+    ========================== -->
+
+    <section class="controls">
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search for a weapon..."
+            >
+
+        </div>
+
+
+        <div class="sort-box">
+
+            <label for="sortSelect">
+                SORT
+            </label>
+
+            <select id="sortSelect">
+
+                <option value="default">
+                    Default
+                </option>
+
+                <option value="name">
+                    Name A-Z
+                </option>
+
+                <option value="newest">
+                    Newest
+                </option>
+
+                <option value="favorites">
+                    Favorites
+                </option>
+
+            </select>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CATEGORY NAVIGATION
+    ========================== -->
+
+    <nav class="category-nav">
+
+        <a href="#SMG">SMG</a>
+
+        <a href="#AR">AR</a>
+
+        <a href="#SR">SR</a>
+
+        <a href="#MM">MM</a>
+
+        <a href="#LMG">LMG</a>
+
+        <a href="#SG">SG</a>
+
+        <a href="#Pistol">PISTOL</a>
+
+    </nav>
+
+
+    <!-- =========================
+         LOADOUT CONTAINER
+    ========================== -->
+
+    <main id="loadoutContainer">
+
+        <!-- JavaScript generates
+             all weapon sections here -->
+
+    </main>
+
+
+    <!-- =========================
+         EMPTY SEARCH STATE
+    ========================== -->
+
+    <div
+        id="emptyState"
+        class="empty-state"
+    >
+
+        <div class="empty-icon">
+            🔍
+        </div>
+
+        <h2>
+            NO LOADOUTS FOUND
+        </h2>
+
+        <p>
+            Try searching for another weapon.
+        </p>
+
+    </div>
+
+
+    <!-- =========================
+         ADD / EDIT MODAL
+    ========================== -->
+
+    <div
+        id="modal"
+        class="modal"
+    >
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <p class="section-label">
+                        WEAPON BUILDER
+                    </p>
+
+                    <h2 id="modalTitle">
+                        ADD LOADOUT
+                    </h2>
+
+                </div>
+
+                <button
+                    id="closeModal"
+                    class="close-btn"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="loadoutForm">
+
+                <input
+                    type="hidden"
+                    id="editId"
+                >
+
+
+                <div class="form-grid">
+
+
+                    <!-- WEAPON NAME -->
+
+                    <div class="form-group">
+
+                        <label>
+                            WEAPON NAME
+                        </label>
+
+                        <input
+                            type="text"
+                            id="weaponName"
+                            placeholder="Example: M4"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- CATEGORY -->
+
+                    <div class="form-group">
+
+                        <label>
+                            CATEGORY
+                        </label>
+
+                        <select
+                            id="weaponCategory"
+                            required
+                        >
+
+                            <option value="SMG">
+                                SMG
+                            </option>
+
+                            <option value="AR">
+                                Assault Rifle
+                            </option>
+
+                            <option value="SR">
+                                Sniper Rifle
+                            </option>
+
+                            <option value="MM">
+                                Marksman Rifle
+                            </option>
+
+                            <option value="LMG">
+                                LMG
+                            </option>
+
+                            <option value="SG">
+                                Shotgun
+                            </option>
+
+                            <option value="Pistol">
+                                Pistol
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- IMAGE -->
+
+                    <div class="form-group full">
+
+                        <label>
+                            WEAPON IMAGE URL
+                        </label>
+
+                        <input
+                            type="url"
+                            id="weaponImage"
+                            placeholder="https://example.com/gun.png"
+                        >
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="form-group full">
+
+                        <label>
+                            DESCRIPTION
+                        </label>
+
+                        <textarea
+                            id="description"
+                            placeholder="Describe this build..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- MAIN BUILD -->
+
+                    <div class="form-group full">
+
+                        <label>
+                            MAIN BUILD
+                        </label>
+
+                        <textarea
+                            id="mainBuild"
+                            placeholder="Attachment 1&#10;Attachment 2&#10;Attachment 3&#10;Attachment 4&#10;Attachment 5"
+                        ></textarea>
+
+                        <small>
+                            Put each attachment on a new line.
+                        </small>
+
+                    </div>
+
+
+                    <!-- OPTIC -->
+
+                    <div class="form-group">
+
+                        <label>
+                            OPTIC
+                        </label>
+
+                        <input
+                            type="text"
+                            id="optic"
+                            placeholder="Red Dot Sight"
+                        >
+
+                    </div>
+
+
+                    <!-- PLAYSTYLE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            PLAYSTYLE
+                        </label>
+
+                        <input
+                            type="text"
+                            id="playstyle"
+                            placeholder="Aggressive"
+                        >
+
+                    </div>
+
+
+                    <!-- PERKS -->
+
+                    <div class="form-group full">
+
+                        <label>
+                            RECOMMENDED PERKS
+                        </label>
+
+                        <input
+                            type="text"
+                            id="perks"
+                            placeholder="Lightweight, Quick Fix, Dead Silence"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        id="cancelBtn"
+                        class="secondary-btn"
+                    >
+                        CANCEL
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="save-btn"
+                    >
+                        SAVE LOADOUT
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         DELETE MODAL
+    ========================== -->
+
+    <div
+        id="deleteModal"
+        class="modal"
+    >
+
+        <div class="confirm-box">
+
+            <h2>
+                DELETE LOADOUT?
+            </h2>
+
+            <p>
+                This loadout will be permanently removed.
+            </p>
+
+            <div class="form-actions">
+
+                <button
+                    id="cancelDelete"
+                    class="secondary-btn"
+                >
+                    CANCEL
+                </button>
+
+                <button
+                    id="confirmDelete"
+                    class="delete-confirm-btn"
+                >
+                    DELETE
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+</body>
+</html>
