@@ -14,16 +14,24 @@
     <!-- =========================
          NAVBAR
     ========================== -->
-
     <header class="navbar">
 
         <div class="logo">
-            <span>CODM</span>
-            <small>LOADOUTS</small>
+            <span>CODM</span> LOADOUTS
         </div>
 
+        <nav class="nav-links">
+            <a href="#SMG">SMG</a>
+            <a href="#AR">AR</a>
+            <a href="#SR">SR</a>
+            <a href="#MM">MM</a>
+            <a href="#LMG">LMG</a>
+            <a href="#SG">SG</a>
+            <a href="#Pistol">PISTOL</a>
+        </nav>
+
         <button id="addLoadoutBtn" class="add-btn">
-            + Add Loadout
+            Add Loadout
         </button>
 
     </header>
@@ -32,30 +40,30 @@
     <!-- =========================
          HERO
     ========================== -->
-
     <section class="hero">
 
         <div class="hero-content">
 
-            <p class="hero-label">
+            <div class="hero-badge">
                 CALL OF DUTY: MOBILE
-            </p>
+            </div>
 
             <h1>
-                YOUR
-                <span>LOADOUTS</span>
+                BUILD OUR
+                <span>PERFECT LOADOUT</span>
             </h1>
 
-            <p class="hero-description">
-                Organize your weapons, attachments and favorite
-                builds in one place.
+            <p>
+                Organize, customize and save our favorite CODM weapon builds.
             </p>
 
             <button
-                class="scroll-btn"
-                onclick="document.getElementById('SMG').scrollIntoView({ behavior: 'smooth' })"
+                class="hero-button"
+                onclick="document.getElementById('loadoutContainer').scrollIntoView({
+                    behavior: 'smooth'
+                })"
             >
-                VIEW LOADOUTS ↓
+                EXPLORE LOADOUTS
             </button>
 
         </div>
@@ -64,47 +72,90 @@
 
 
     <!-- =========================
-         SEARCH / SORT
+         CONTROLS
     ========================== -->
+    <section class="controls-section">
 
-    <section class="controls">
+        <div class="controls">
 
-        <div class="search-box">
+            <div class="search-box">
 
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search for a weapon..."
-            >
+                <span class="search-icon">⌕</span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search weapon..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div class="control-right">
+
+                <button
+                    id="favoritesFilter"
+                    class="filter-btn"
+                >
+                    ★ Favorites
+                </button>
+
+                <select id="sortSelect">
+
+                    <option value="default">
+                        Sort: Default
+                    </option>
+
+                    <option value="nameAsc">
+                        Name: A → Z
+                    </option>
+
+                    <option value="nameDesc">
+                        Name: Z → A
+                    </option>
+
+                    <option value="newest">
+                        Recently Added
+                    </option>
+
+                </select>
+
+            </div>
 
         </div>
 
 
-        <div class="sort-box">
+        <!-- CATEGORY NAV -->
+        <div class="category-nav">
 
-            <label for="sortSelect">
-                SORT
-            </label>
+            <a href="#SMG" data-category="SMG">
+                SMG
+            </a>
 
-            <select id="sortSelect">
+            <a href="#AR" data-category="AR">
+                AR
+            </a>
 
-                <option value="default">
-                    Default
-                </option>
+            <a href="#SR" data-category="SR">
+                SR
+            </a>
 
-                <option value="name">
-                    Name A-Z
-                </option>
+            <a href="#MM" data-category="MM">
+                MM
+            </a>
 
-                <option value="newest">
-                    Newest
-                </option>
+            <a href="#LMG" data-category="LMG">
+                LMG
+            </a>
 
-                <option value="favorites">
-                    Favorites
-                </option>
+            <a href="#SG" data-category="SG">
+                SG
+            </a>
 
-            </select>
+            <a href="#Pistol" data-category="Pistol">
+                PISTOL
+            </a>
 
         </div>
 
@@ -112,60 +163,37 @@
 
 
     <!-- =========================
-         CATEGORY NAVIGATION
-    ========================== -->
-
-    <nav class="category-nav">
-
-        <a href="#SMG">SMG</a>
-
-        <a href="#AR">AR</a>
-
-        <a href="#SR">SR</a>
-
-        <a href="#MM">MM</a>
-
-        <a href="#LMG">LMG</a>
-
-        <a href="#SG">SG</a>
-
-        <a href="#Pistol">PISTOL</a>
-
-    </nav>
-
-
-    <!-- =========================
          LOADOUT CONTAINER
     ========================== -->
-
-    <main id="loadoutContainer">
-
-        <!-- JavaScript generates
-             all weapon sections here -->
-
-    </main>
+    <main id="loadoutContainer"></main>
 
 
     <!-- =========================
-         EMPTY SEARCH STATE
+         EMPTY STATE
     ========================== -->
-
     <div
         id="emptyState"
-        class="empty-state"
+        class="empty-state hidden"
     >
 
         <div class="empty-icon">
-            🔍
+            ◌
         </div>
 
         <h2>
-            NO LOADOUTS FOUND
+            No Loadouts Found
         </h2>
 
         <p>
-            Try searching for another weapon.
+            Try changing your search or create a new loadout.
         </p>
+
+        <button
+            id="emptyAddBtn"
+            class="add-btn"
+        >
+            + Add Loadout
+        </button>
 
     </div>
 
@@ -173,34 +201,33 @@
     <!-- =========================
          ADD / EDIT MODAL
     ========================== -->
-
     <div
-        id="modal"
+        id="loadoutModal"
         class="modal"
     >
 
         <div class="modal-content">
 
+            <button
+                id="closeModal"
+                class="modal-close"
+            >
+                ×
+            </button>
+
             <div class="modal-header">
 
-                <div>
+                <span class="modal-label">
+                    LOADOUT EDITOR
+                </span>
 
-                    <p class="section-label">
-                        WEAPON BUILDER
-                    </p>
+                <h2 id="modalTitle">
+                    Add Loadout
+                </h2>
 
-                    <h2 id="modalTitle">
-                        ADD LOADOUT
-                    </h2>
-
-                </div>
-
-                <button
-                    id="closeModal"
-                    class="close-btn"
-                >
-                    ×
-                </button>
+                <p>
+                    Create your custom CODM weapon build.
+                </p>
 
             </div>
 
@@ -215,13 +242,11 @@
 
                 <div class="form-grid">
 
-
                     <!-- WEAPON NAME -->
-
                     <div class="form-group">
 
-                        <label>
-                            WEAPON NAME
+                        <label for="weaponName">
+                            Weapon Name
                         </label>
 
                         <input
@@ -235,11 +260,10 @@
 
 
                     <!-- CATEGORY -->
-
                     <div class="form-group">
 
-                        <label>
-                            CATEGORY
+                        <label for="weaponCategory">
+                            Category
                         </label>
 
                         <select
@@ -281,98 +305,94 @@
 
 
                     <!-- IMAGE -->
+                    <div class="form-group full-width">
 
-                    <div class="form-group full">
-
-                        <label>
-                            WEAPON IMAGE URL
+                        <label for="weaponImage">
+                            Weapon Image URL
                         </label>
 
                         <input
                             type="url"
                             id="weaponImage"
-                            placeholder="https://example.com/gun.png"
+                            placeholder="https://example.com/weapon.png"
                         >
 
                     </div>
 
 
                     <!-- DESCRIPTION -->
+                    <div class="form-group full-width">
 
-                    <div class="form-group full">
-
-                        <label>
-                            DESCRIPTION
+                        <label for="description">
+                            Description
                         </label>
 
                         <textarea
                             id="description"
-                            placeholder="Describe this build..."
+                            rows="3"
+                            placeholder="Short description of this build..."
                         ></textarea>
 
                     </div>
 
 
                     <!-- MAIN BUILD -->
+                    <div class="form-group">
 
-                    <div class="form-group full">
-
-                        <label>
-                            MAIN BUILD
+                        <label for="mainBuild">
+                            Main Build
                         </label>
 
                         <textarea
                             id="mainBuild"
-                            placeholder="Attachment 1&#10;Attachment 2&#10;Attachment 3&#10;Attachment 4&#10;Attachment 5"
+                            rows="6"
+                            placeholder="Monolithic Suppressor
+OWC Marksman
+No Stock
+Granulated Grip Tape
+60 Round Mag"
                         ></textarea>
-
-                        <small>
-                            Put each attachment on a new line.
-                        </small>
 
                     </div>
 
 
                     <!-- OPTIC -->
-
                     <div class="form-group">
 
-                        <label>
-                            OPTIC
+                        <label for="optic">
+                            Optic Build
                         </label>
 
-                        <input
-                            type="text"
+                        <textarea
                             id="optic"
+                            rows="6"
                             placeholder="Red Dot Sight"
-                        >
+                        ></textarea>
 
                     </div>
 
 
                     <!-- PLAYSTYLE -->
-
                     <div class="form-group">
 
-                        <label>
-                            PLAYSTYLE
+                        <label for="playstyle">
+                            Playstyle
                         </label>
 
                         <input
                             type="text"
                             id="playstyle"
-                            placeholder="Aggressive"
+                            placeholder="Aggressive / Balanced / Long Range"
                         >
 
                     </div>
 
 
                     <!-- PERKS -->
+                    <div class="form-group">
 
-                    <div class="form-group full">
-
-                        <label>
-                            RECOMMENDED PERKS
+                        <label for="perks">
+                            Recommended Perks
                         </label>
 
                         <input
@@ -383,7 +403,6 @@
 
                     </div>
 
-
                 </div>
 
 
@@ -391,17 +410,17 @@
 
                     <button
                         type="button"
-                        id="cancelBtn"
-                        class="secondary-btn"
+                        id="cancelModal"
+                        class="cancel-btn"
                     >
-                        CANCEL
+                        Cancel
                     </button>
 
                     <button
                         type="submit"
                         class="save-btn"
                     >
-                        SAVE LOADOUT
+                        Save Loadout
                     </button>
 
                 </div>
@@ -416,36 +435,39 @@
     <!-- =========================
          DELETE MODAL
     ========================== -->
-
     <div
         id="deleteModal"
         class="modal"
     >
 
-        <div class="confirm-box">
+        <div class="delete-box">
+
+            <div class="delete-icon">
+                !
+            </div>
 
             <h2>
-                DELETE LOADOUT?
+                Delete Loadout?
             </h2>
 
             <p>
-                This loadout will be permanently removed.
+                This action cannot be undone.
             </p>
 
-            <div class="form-actions">
+            <div class="delete-actions">
 
                 <button
                     id="cancelDelete"
-                    class="secondary-btn"
+                    class="cancel-btn"
                 >
-                    CANCEL
+                    Cancel
                 </button>
 
                 <button
                     id="confirmDelete"
-                    class="delete-confirm-btn"
+                    class="delete-btn"
                 >
-                    DELETE
+                    Delete
                 </button>
 
             </div>
@@ -455,7 +477,52 @@
     </div>
 
 
-    <!-- JAVASCRIPT -->
+    <!-- =========================
+         IMAGE VIEWER
+    ========================== -->
+    <div
+        id="imageViewer"
+        class="image-viewer"
+    >
+
+        <button
+            id="imageViewerClose"
+            class="image-viewer-close"
+            aria-label="Close image viewer"
+        >
+            ×
+        </button>
+
+        <div class="viewer-content">
+
+            <img
+                id="viewerImage"
+                src=""
+                alt=""
+            >
+
+            <div
+                id="viewerName"
+                class="viewer-name"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         TOAST
+    ========================== -->
+    <div
+        id="toast"
+        class="toast"
+    >
+        <span id="toastText">
+            Saved!
+        </span>
+    </div>
+
 
     <script src="script.js"></script>
 
